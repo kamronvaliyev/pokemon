@@ -1,0 +1,47 @@
+.form form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.form form input {
+  width: 180px;
+  height: 40px;
+  border-radius: 15px;
+  padding-left: 15px;
+}
+.form form button {
+  width: 180px;
+  height: 40px;
+  border-radius: 15px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  gap: 35px;
+}
+ul li {
+  list-style: none;
+  width: 250px;
+  height: 360px;
+  border: 2px solid black;
+  background-color: #fff;
+  border-radius: 15px;
+}
+ul li div {
+  padding: 20px;
+}
+ul li div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  border-bottom: 2px solid black;
+}
+ul li p {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 18px;
+}/*# sourceMappingURL=form.css.map */
