@@ -4,6 +4,7 @@ var elInputType = document.querySelector("[data-type]");
 var elInputWeight = document.querySelector("[data-weight]");
 var elInputAge = document.querySelector("[data-age]");
 var elInputImg = document.querySelector("[data-img]");
+let elInputSearch = document.querySelector("[data-search]");
 
 var elUl = document.querySelector("[data-ul]");
 
@@ -30,6 +31,9 @@ elForm.addEventListener("submit", function (evt) {
 
     // renderPokemon()
 })
+
+
+
 
 function renderPokemon() {
     elUl.innerHTML = "";
@@ -60,6 +64,6 @@ function createLi(pokemon) {
     infoBox.appendChild(elSpan);
     infoBox.appendChild(elP);
 
-
     return elLi;
 }
+
