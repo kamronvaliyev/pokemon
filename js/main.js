@@ -4,11 +4,56 @@ var elInputType = document.querySelector("[data-type]");
 var elInputWeight = document.querySelector("[data-weight]");
 var elInputAge = document.querySelector("[data-age]");
 var elInputImg = document.querySelector("[data-img]");
-let elInputSearch = document.querySelector("[data-search]");
-
 var elUl = document.querySelector("[data-ul]");
+let elInputSearch = document.querySelector("[data-search]");
+let elTemp = document.querySelector("[data-template]")
+let elLikesList = document.querySelector("[data-likes-list");
 
-renderPokemon();
+const likes = getlikes();
+renderLikes(likes)
+
+renderPokemon(pokemons);
+
+elUl.addEventListener("click", (evt) => {
+    onFavoriteClick(evt);
+})
+function onFavoriteClick(evt) {
+    const el = evt.target.closest("[data-btn-like]");
+
+    if (!el) return
+    const id = +el.dataset.id;
+
+    if (likes.includes(id)) {
+        likes.splice(likes.indexOf(id), 1)
+    } else {
+        likes.push(id);
+    }
+    setLikes(likes)
+    renderPokemon(pokemons)
+}
+
+function setLikes(likes) {
+    localStorage.setItem("likes", JSON.stringify(likes))
+    renderLikes(likes)
+}
+
+function renderLikes(likes) {
+    let html = "";
+    likes.forEach(item => {
+        const pokemon = pokemons.find(pokemon => pokemon.id === item)
+
+        html += `<span>${pokemon.name}</span>`
+    })
+
+    elLikesList.innerHTML = html
+
+}
+
+
+function getlikes(likes) {
+    const stringLikes = localStorage.getItem("likes") || "[]"
+    return JSON.parse(stringLikes);
+}
 
 elForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
@@ -29,13 +74,20 @@ elForm.addEventListener("submit", function (evt) {
     pokemons.unshift(pokemon);
     elUl.prepend(createLi(pokemon));
 
-    // renderPokemon()
+    // renderPokemon(namesPokemon)
 })
 
+elInputSearch.addEventListener("keyup", (evt) => {
+    var namesPokemon = []
+    pokemons.forEach((pokemon) => {
+        if (pokemon.name.includes(elInputSearch.value)) {
+            namesPokemon.push(pokemon)
+        }
+    });
+    renderPokemon(namesPokemon)
+})
 
-
-
-function renderPokemon() {
+function renderPokemon(pokemons) {
     elUl.innerHTML = "";
     for (var i = 0; i < pokemons.length; i++) {
         pokemon = pokemons[i];
@@ -43,27 +95,17 @@ function renderPokemon() {
     }
 }
 
+
 function createLi(pokemon) {
-    var elLi = document.createElement("li");
-    var imgBox = document.createElement("div");
-    var infoBox = document.createElement("div");
-    var elImg = document.createElement("img");
-    var elH2 = document.createElement("h2");
-    var elSpan = document.createElement("span");
-    var elP = document.createElement("p");
+    let elLi = elTemp.content.cloneNode(true)
 
-    elImg.src = pokemon.img;
-    elH2.textContent = pokemon.name;
-    elSpan.textContent = pokemon.type;
-    elP.textContent = `${pokemon.weight}-${pokemon.avg_spawns}`;
-
-    elLi.appendChild(imgBox);
-    elLi.appendChild(infoBox);
-    imgBox.appendChild(elImg);
-    infoBox.appendChild(elH2);
-    infoBox.appendChild(elSpan);
-    infoBox.appendChild(elP);
+    elLi.querySelector("[data-img-temp]").src = pokemon.img
+    elLi.querySelector("[data-btn-like]").dataset.id = pokemon.id;
+    elLi.querySelector("[data-btn-like]").textContent = likes.includes(pokemon.id) ? "Liked" : "Like";
+    elLi.querySelector("[data-template-heading]").textContent = pokemon.name;
+    elLi.querySelector("[data-type]").textContent = pokemon.type;
+    elLi.querySelector("[data-weight-svg_spawns]").textContent = `${pokemon.weight}-${pokemon.avg_spawns}`;
 
     return elLi;
 }
-
+// renderPokemon(pokemons)

@@ -1,7 +1,9 @@
 .form {
   form {
     display: flex;
-    flex-direction: row;
+    // flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 10px;
     input {
       width: 180px;
@@ -17,7 +19,6 @@
     }
   }
 }
-
 ul {
   display: flex;
   justify-content: space-between;
@@ -31,6 +32,7 @@ ul {
     border: 2px solid black;
     background-color: #fff;
     border-radius: 15px;
+    // margin-left: 25px;
     div {
       padding: 20px;
       &:first-child {
@@ -41,13 +43,31 @@ ul {
         border-bottom: 2px solid black;
       }
     }
-    // h2 {
-      // font-size: 28px;
-    // }
+    h2 {
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+    span {
+      margin-left: 10px;
+    }
     p {
+      margin-left: 10px;
       font-size: 24px;
       font-weight: 500;
       margin-top: 18px;
+    }
+    button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 25px;
+      border-radius: 2px;
+      border: none;
+      background-color:greenyellow;
+      font-size: 24px;
+      font-weight: 400;
+      cursor: pointer;
     }
   }
 }
